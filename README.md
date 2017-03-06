@@ -54,23 +54,23 @@ size | 飞线宽度 | 像素 | 否,默认5
 
 图1为初始状态，s为起点，e为终点，p1和p2为两个中间点，初始时候s、p1和p2重叠：
 
-![image](https://github.com/xswei/FlyLine/blob/master/1.png)
+![image](https://github.com/xswei/FlyLine/blob/master/pics/1.png)
 
 图2为p1匀速离开s点，那么p2点离开s点的时间由参数`len`决定，len其实是个百分比，用来表示p1到p2之间的距离与s到e之间距离的比例：
 
-![image](https://github.com/xswei/FlyLine/blob/master/2.png)
+![image](https://github.com/xswei/FlyLine/blob/master/pics/2.png)
 
 图3为p1和p2同时过渡到e点，由于速度不变，p1和p2的相对位置保持不变：
 
-![image](https://github.com/xswei/FlyLine/blob/master/3.png)
+![image](https://github.com/xswei/FlyLine/blob/master/pics/3.png)
 
 图4表示p1已经到达e点，p2还未到达：
 
-![image](https://github.com/xswei/FlyLine/blob/master/4.png)
+![image](https://github.com/xswei/FlyLine/blob/master/pics/4.png)
 
 图5表示p1和p2都到达e点，此时飞线完成，从飞线数组中移除此条飞线释放内存：
 
-![image](https://github.com/xswei/FlyLine/blob/master/5.png)
+![image](https://github.com/xswei/FlyLine/blob/master/pics/5.png)
 
 
 绘制时在p1和p2之间绘制一条渐变线条即可。在计算时候p1和p2分别有一个参数t,这个参数从0递增到1，增量由帧率+预定的时间算出。
