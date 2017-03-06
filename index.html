@@ -20,12 +20,24 @@
 			background: black;
 		}
 		#canvas{
+			position: absolute;
+			z-index: 999;
+			cursor: crosshair;
+		}
+		#controls{
+			border:2px red solid;
+			position: absolute;
+			z-index: 9;
+			background: #fff;
+			padding: 20px;
 		}
 	</style>
 </head>
 <body>
 	<div id="main">
-		<div id="stats"></div>
+		<div id="controls">
+			鼠标拖动试试
+		</div>
 		<canvas id="canvas">
 		</canvas>
 	</div>
@@ -35,29 +47,49 @@
 			canvas.width = document.querySelector("#main").clientWidth;
 			canvas.height = document.querySelector("#main").clientHeight;
 
+			var context = canvas.getContext("2d");
+
+			var clicked = false;
+
+			var p = [];
+
 			var w = canvas.width;
 			var h = canvas.height;
 
+
 			flyline.setCanvas("#canvas");
 
+			document.getElementById('canvas').addEventListener("mousedown",function(e){
+				console.log(e);
+				clicked = true;
+				p[0] = [e.x,e.y]
+			});
+			document.getElementById('canvas').addEventListener("mousemove",mouseMove);
+			document.getElementById('canvas').addEventListener("mouseup",mouseUp);
 
-			setInterval(()=>{
-				add(20)
-			},1000)
 
-			function add(n){
-				for(let i=0;i<n;++i){
+			function mouseMove(ev){
+				//console.log(ev)
+				if(clicked){
+					p[1] = [ev.x,ev.y];
+				}
+
+			}
+			function mouseUp(ev){
+				if(p[0] && p[1]){
 					flyline.addFlyL({
-						start:{x:Math.random()*w,y:Math.random()*h},
-						target:{x:Math.random()*w,y:Math.random()*h},
-						color:"#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6),
+						start:{x:p[0][0],y:p[0][1]},
+						target:{x:p[1][0],y:p[1][1]},
+						color:'#'+Math.floor(Math.random()*16777215).toString(16),
 						time:2*Math.random()*1000,
 						len:Math.random(),
 						size:5*Math.random()
 					})
 				}
-				console.log(flyline.flys.length);
+				p = [];
+				clicked = false;
 			}
+			
 			
 		}
 	</script>
