@@ -20,7 +20,6 @@
 			background: black;
 		}
 		#canvas{
-			border:2px steelblue solid;
 		}
 	</style>
 </head>
@@ -32,25 +31,33 @@
 	</div>
 	<script>
 		window.onload = function(){
+			return;
 			var canvas = document.querySelector("#canvas");
 			canvas.width = document.querySelector("#main").clientWidth;
 			canvas.height = document.querySelector("#main").clientHeight;
 
+			var w = canvas.width;
+			var h = canvas.height;
 
 			flyline.setCanvas("#canvas");
-			for(var i=0;i<20;++i){
-				flyline.addFlyQ({
-				start:{
-					x:Math.random()*canvas.width,
-					y:Math.random()*canvas.height,
-				},end:{
-					x:Math.random()*canvas.width,
-					y:Math.random()*canvas.height,
-				},c:{
-					x:Math.random()*canvas.width,
-					y:Math.random()*canvas.height,
+
+
+			setInterval(()=>{
+				add(20)
+			},1000)
+
+			function add(n){
+				for(let i=0;i<n;++i){
+					flyline.addFlyL({
+						start:{x:Math.random()*w,y:Math.random()*h},
+						target:{x:Math.random()*w,y:Math.random()*h},
+						color:"#"+("00000"+((Math.random()*16777215+0.5)>>0).toString(16)).slice(-6),
+						time:2*Math.random()*1000,
+						len:Math.random(),
+						size:5*Math.random()
+					})
 				}
-			})
+				console.log(flyline.flys.length);
 			}
 			
 		}
