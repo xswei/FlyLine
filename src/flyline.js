@@ -31,11 +31,6 @@
 	}
 	
 
-
-
-
-
-
 	function setCanvas(s){
 		canvas = document.querySelector(s);
 		if(canvas instanceof HTMLCanvasElement){
