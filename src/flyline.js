@@ -7,13 +7,7 @@
 		canvas = null,
 		context = null,
 		that = exports;
-
-
-	var stats = new Stats();
-
-	document.querySelector("#stats").appendChild(stats.domElement);
-	
-
+	render();
 	function addFlyL(o){
 		var f = {
 			type:"line",
@@ -29,8 +23,6 @@
 		f.step = ((1+f.l)*1000)/(60*f.t);
 		flys.push(f);
 	}
-	
-
 	function setCanvas(s){
 		canvas = document.querySelector(s);
 		if(canvas instanceof HTMLCanvasElement){
@@ -39,17 +31,13 @@
 			throw new Error("Fail to set Canvas!");
 		}
 	}
-
-	render();
 	function render(){
 		if(context){
 			context.clearRect(0,0,canvas.width,canvas.height);
 		}
 		drawFly();
-		stats.update();
 		requestAnimationFrame(render);
 	}
-
 	function drawFly(){
 		let newFlys = [];
 		for(let i=0,len=flys.length;i<len;++i){
@@ -79,19 +67,14 @@
 			}
 		}
 	}
-
-
-
-
-
-
-
 	function getPointInLine(s,e,t){
 		var x = e.x - (e.x-s.x)*t;
 		var y = e.y - (e.y-s.y)*t;
 		return {x:x,y:y};
 	}
-	function getPointQuadRaticBeizer(s,c,e,t){
+
+
+	/*function getPointQuadRaticBeizer(s,c,e,t){
 		var x = Math.pow(1-t,2) * s.x + 2 * (1-t) * t * c.x + Math.pow(t,2) * e.x; 
     	var y = Math.pow(1-t,2) * s.y + 2 * (1-t) * t * c.y + Math.pow(t,2) * e.y; 
    		return {x:x,y:y};
@@ -108,12 +91,7 @@
 	    + (3 * b + pct * (-6 * b + b * 3 * pct)) * pct
 	    + (c * 3 - c * 3 * pct) * t2
 	    + d * t3;
-	}
-
-
-
-
-
+	}*/
 	exports.version = '1.0.0';
 	exports.addFlyL = addFlyL;
 	exports.setCanvas = setCanvas;
