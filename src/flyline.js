@@ -31,7 +31,6 @@
 			size:o.size || 5,
 		}
 		f.step = ((1+f.l)*1000)/(60*f.t);
-		console.log(f);
 		flys.push(f);
 	}
 	function addFlyQ(o){
