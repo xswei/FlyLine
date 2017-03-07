@@ -21,7 +21,6 @@
 		}
 		#canvas{
 			position: absolute;
-			z-index: 999;
 			cursor: crosshair;
 		}
 		#controls{
@@ -36,7 +35,9 @@
 <body>
 	<div id="main">
 		<div id="controls">
-			鼠标拖动试试
+			<button id="line">line</button>
+			<br><br><br>
+			<button id="quard">quard</button>
 		</div>
 		<canvas id="canvas">
 		</canvas>
@@ -47,50 +48,47 @@
 			canvas.width = document.querySelector("#main").clientWidth;
 			canvas.height = document.querySelector("#main").clientHeight;
 
-			var context = canvas.getContext("2d");
-
-			var clicked = false;
-
-			var p = [];
-
-			var w = canvas.width;
-			var h = canvas.height;
-
+			var w = canvas.width,
+				h = canvas.height;
 
 			flyline.setCanvas("#canvas");
 
-			document.getElementById('canvas').addEventListener("mousedown",function(e){
-				console.log(e);
-				clicked = true;
-				p[0] = [e.x,e.y]
-			});
-			document.getElementById('canvas').addEventListener("mousemove",mouseMove);
-			document.getElementById('canvas').addEventListener("mouseup",mouseUp);
+
+			document.getElementById('line').addEventListener("click",addL)
+			document.getElementById('quard').addEventListener("click",addQ)
 
 
-			function mouseMove(ev){
-				//console.log(ev)
-				if(clicked){
-					p[1] = [ev.x,ev.y];
+			function addL(){
+				var o = {
+					start:{
+						x:Math.random()*w,
+						y:Math.random()*h
+					},target:{
+						x:Math.random()*w,
+						y:Math.random()*h
+					},color:'#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6),
+					time:5000*Math.random(),
+					len:1,
+					size:5
 				}
-
+				flyline.addFlyL(o)
 			}
-			function mouseUp(ev){
-				if(p[0] && p[1]){
-					flyline.addFlyL({
-						start:{x:p[0][0],y:p[0][1]},
-						target:{x:p[1][0],y:p[1][1]},
-						color:'#'+Math.floor(Math.random()*16777215).toString(16),
-						time:2*Math.random()*1000,
-						len:Math.random(),
-						size:5*Math.random()
-					})
+			function addQ(){
+				var o = {
+					start:{
+						x:Math.random()*w,
+						y:Math.random()*h
+					},target:{
+						x:Math.random()*w,
+						y:Math.random()*h
+					},color:'#'+('00000'+(Math.random()*0x1000000<<0).toString(16)).substr(-6),
+					time:5000*Math.random(),
+					len:1,
+					size:5,
+					i:Math.random()*2-1
 				}
-				p = [];
-				clicked = false;
+				flyline.addFlyQ(o);
 			}
-			
-			
 		}
 	</script>
 	<script src="./stats.js"></script>
