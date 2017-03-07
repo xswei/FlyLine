@@ -135,3 +135,5 @@ i | 弯曲程度 | 系数 范围[-1,1] | 否,默认0.3
 `i=1`或`i=-1`时，控制点最远，此时控制点距离s和e的中点距离为s到e的距离。此时线条最弯曲。
 
 ![image](https://github.com/xswei/FlyLine/blob/master/pics/q1.png)
+
+### 曲线飞线存在小问题，接下来考虑使用lineDash做
