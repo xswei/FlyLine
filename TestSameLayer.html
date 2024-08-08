@@ -1,0 +1,60 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+</head>
+<style>
+  .container {
+    text-align: center;
+    /* max-width: 100vw; */
+    margin: 60px;
+    font-size: 50px;
+  }
+
+  .p {
+    position:absolute;
+    top: 20px;
+    left: 50px;
+    font-size: 100px;
+    word-break: break-all;
+    z-index:1;
+    background-color:red;
+  }
+   .p1 {
+    position:absolute;
+    top: 30px;
+    left: 20px;
+    font-size: 100px;
+    word-break: break-all;
+    z-index:3;
+    background-color:yellow;
+  }
+</style>
+
+<body>
+  <div class="container">
+  </div>
+  <div id="text" class="p">sadfadfadfadfadfa</div>
+  <img id="preview">
+  <div id="text2" class="p1">qqqqqqqqqqqqqqqqqqqq</div>
+  <mytag id = "mytag"
+         style="position:absolute;background-color:green;width:700px; height:1000px;">
+    占位的标签
+  </mytag>
+</body>
+<script>
+  		var div = document.getElementById('mytag');
+		div.addEventListener('touchstart', test);
+		div.addEventListener('touchend', test);
+		div.addEventListener('touchcancel', test);
+		div.addEventListener('touchleave', test);
+		div.addEventListener('touchmove', test);
+
+		function test(e) {
+			var test = e.currentTarget;
+			console.log("Hi, div clicked!");
+		}
+		console.log("This is the test div page");
+</script>
+
+</html>
